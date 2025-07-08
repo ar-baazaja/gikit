@@ -77,6 +77,7 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
+      box-sizing: border-box;
     }
     .hero::before {
       content: '';
@@ -403,48 +404,25 @@
         font-size: 24px;
       }
       .hero {
-        padding: 80px 20px;
-        min-height: auto;
-      }
-      .section {
-        padding: 60px 20px;
-      }
-      .card {
-        padding: 25px;
-        min-height: auto;
-      }
-      .stat-box {
-        min-width: auto;
-        width: 100%;
-        max-width: 280px;
-        padding: 25px;
-      }
-      .stat-box h4 {
-        font-size: 36px;
-      }
-      .hero p {
-        font-size: 18px;
-        line-height: 1.6;
-      }
-      .tag-slider {
-        margin: 10px 0;
-      }
-      .tag-box {
-        padding: 8px 12px;
-        font-size: 12px;
-        margin: 4px;
+        min-height: auto !important;
+        height: auto !important;
+        padding: 60px 20px !important;
+        display: block !important;
       }
       .hero > div {
         padding: 0 20px !important;
+        max-width: 100% !important;
       }
       .hero h2 {
         text-align: center !important;
         margin-bottom: 30px !important;
+        font-size: 32px !important;
       }
       .hero p {
         text-align: center !important;
         margin-left: auto !important;
         margin-right: auto !important;
+        font-size: 16px !important;
       }
       .hero .cta-buttons {
         justify-content: center !important;
@@ -476,7 +454,7 @@
         padding: 40px 15px;
       }
       .hero {
-        padding: 60px 15px;
+        padding: 40px 15px !important;
       }
       .card {
         padding: 20px;
