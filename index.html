@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gikit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: #2c3e50;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    header {
+      background: rgba(30, 60, 114, 0.98);
+      backdrop-filter: blur(15px);
+      color: #fff;
+      padding: 25px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      background: linear-gradient(45deg, #ffffff, #e0e7ef);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 30px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      font-size: 15px;
+    }
+    nav a:hover {
+      color: #b0b8c9;
+      transform: translateY(-2px);
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -8px;
+      left: 0;
+      background: linear-gradient(45deg, #ffffff, #b0b8c9);
+      transition: width 0.3s ease;
+      border-radius: 1px;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    .hero {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      padding: 140px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+    .hero h2 {
+      font-size: 64px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      line-height: 1.1;
+      letter-spacing: -1px;
+    }
+    .hero p {
+      margin: 25px 0;
+      font-size: 22px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      color: rgba(255,255,255,0.95);
+      position: relative;
+      z-index: 1;
+      line-height: 1.7;
+    }
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 50px;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+    }
+    .cta-buttons button {
+      padding: 18px 35px;
+      border: none;
+      background: linear-gradient(45deg, #1e3c72, #2a5298);
+      color: #fff;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.4s ease;
+      box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-buttons button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    .cta-buttons button:hover::before {
+      left: 100%;
+    }
+    .cta-buttons button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(30, 60, 114, 0.6);
+      background: linear-gradient(45deg, #2a5298, #1e3c72);
+    }
+    .section {
+      padding: 100px 40px;
+      background: #fff;
+      position: relative;
+    }
+    .section:nth-child(even) {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    .section h3 {
+      font-size: 42px;
+      margin-bottom: 40px;
+      text-align: center;
+      color: #1e3c72;
+      position: relative;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .section h3::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(45deg, #1e3c72, #2a5298);
+      border-radius: 2px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .card {
+      background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+      border-radius: 25px;
+      padding: 40px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+      text-align: center;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      transition: all 0.4s ease;
+      border: 1px solid rgba(30, 60, 114, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(45deg, #1e3c72, #2a5298);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+      border-color: rgba(30, 60, 114, 0.15);
+    }
+    .tag-slider {
+      overflow: hidden;
+      white-space: nowrap;
+      width: 100%;
+      margin: 15px 0;
+    }
+    .tag-row {
+      display: inline-block;
+      animation: slideTags 12s linear infinite;
+    }
+    .tag-box {
+      display: inline-block;
+      background: linear-gradient(45deg, #1e3c72, #2a5298);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 25px;
+      font-size: 13px;
+      margin: 6px;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(30, 60, 114, 0.3);
+      transition: all 0.3s ease;
+    }
+    .tag-box:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(30, 60, 114, 0.4);
+    }
+    @keyframes slideTags {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .subsection-title {
+      margin-top: 20px;
+      font-weight: 600;
+      text-align: center;
+      color: #1e3c72;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    footer {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      color: #fff;
+      text-align: center;
+      padding: 50px 20px;
+      margin-top: 0;
+    }
+    .stats-container {
+      display: flex;
+      gap: 40px;
+      margin-top: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .stat-box {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      border-radius: 25px;
+      padding: 35px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(30, 60, 114, 0.3);
+      color: #fff;
+      min-width: 220px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    .stat-box:hover::before {
+      transform: translateX(100%);
+    }
+    .stat-box:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(30, 60, 114, 0.4);
+    }
+    .stat-box h4 {
+      font-size: 42px;
+      margin: 0;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    .stat-box p {
+      margin: 15px 0 0 0;
+      font-size: 16px;
+      opacity: 0.95;
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+    }
+    .innovation-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 30px;
+    }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .innovation-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .service-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    @media (max-width: 992px) {
+      .innovation-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .service-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero h2 {
+        font-size: 48px;
+      }
+      .section h3 {
+        font-size: 36px;
+      }
+      header {
+        padding: 20px 30px;
+      }
+      header h1 {
+        font-size: 28px;
+      }
+      nav a {
+        margin-left: 25px;
+        font-size: 14px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .innovation-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .service-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero h2 {
+        font-size: 36px;
+        line-height: 1.2;
+      }
+      .section h3 {
+        font-size: 28px;
+      }
+      .stats-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+      .cta-buttons button {
+        width: 100%;
+        max-width: 300px;
+      }
+      nav a {
+        margin-left: 20px;
+        font-size: 13px;
+      }
+      header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+      }
+      header h1 {
+        font-size: 24px;
+      }
+      .hero {
+        padding: 80px 20px;
+        min-height: auto;
+      }
+      .section {
+        padding: 60px 20px;
+      }
+      .card {
+        padding: 25px;
+        min-height: auto;
+      }
+      .stat-box {
+        min-width: auto;
+        width: 100%;
+        max-width: 280px;
+        padding: 25px;
+      }
+      .stat-box h4 {
+        font-size: 36px;
+      }
+      .hero p {
+        font-size: 18px;
+        line-height: 1.6;
+      }
+      .tag-slider {
+        margin: 10px 0;
+      }
+      .tag-box {
+        padding: 8px 12px;
+        font-size: 12px;
+        margin: 4px;
+      }
+      .hero > div {
+        padding: 0 20px !important;
+      }
+      .hero h2 {
+        text-align: center !important;
+        margin-bottom: 30px !important;
+      }
+      .hero p {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      .hero .cta-buttons {
+        justify-content: center !important;
+      }
+      .hero .stats-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+      .hero .stats-container > div {
+        min-width: auto;
+        width: 100%;
+        max-width: 200px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .innovation-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero h2 {
+        font-size: 24px !important;
+        line-height: 1.3 !important;
+      }
+      .section h3 {
+        font-size: 24px;
+      }
+      .section {
+        padding: 40px 15px;
+      }
+      .hero {
+        padding: 60px 15px;
+      }
+      .card {
+        padding: 20px;
+      }
+      .stat-box {
+        padding: 20px;
+      }
+      .stat-box h4 {
+        font-size: 32px;
+      }
+      .hero p {
+        font-size: 14px !important;
+      }
+      .cta-buttons button {
+        padding: 15px 25px;
+        font-size: 14px;
+      }
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+      nav a {
+        margin-left: 0;
+        font-size: 12px;
+      }
+      header {
+        padding: 10px 15px;
+      }
+      header h1 {
+        font-size: 20px;
+      }
+      .tag-box {
+        padding: 6px 10px;
+        font-size: 11px;
+        margin: 3px;
+      }
+      .subsection-title {
+        font-size: 13px;
+      }
+      .hero .stats-container > div {
+        max-width: 180px;
+        padding: 15px 20px;
+      }
+      .hero .stats-container > div > div:first-child {
+        font-size: 24px !important;
+      }
+      .hero .stats-container > div > div:last-child {
+        font-size: 12px !important;
+      }
+    }
+    
+    @media (max-width: 360px) {
+      .hero h2 {
+        font-size: 24px;
+      }
+      .section h3 {
+        font-size: 20px;
+      }
+      .hero p {
+        font-size: 14px;
+      }
+      .card {
+        padding: 15px;
+      }
+      .stat-box {
+        padding: 15px;
+      }
+      .stat-box h4 {
+        font-size: 28px;
+      }
+      .cta-buttons button {
+        padding: 12px 20px;
+        font-size: 13px;
+      }
+      nav a {
+        font-size: 11px;
+      }
+      header h1 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Gikit</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Our Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div style="text-align: left; max-width: 1200px; margin: 0 auto; padding: 0 40px;">
+      <h2 style="font-size: 56px; line-height: 1.1; margin-bottom: 40px; text-align: left;">Transform Your Business<br>with Unlimited Tech<br>Solutions</h2>
+      <p style="text-align: left; font-size: 20px; margin-bottom: 40px; color: #fff; font-weight: 500; max-width: 800px; margin-left: 0; margin-right: auto;">"They absolutely crush all requests. Every request has been spot on!"</p>
+      <p style="text-align: left; margin-bottom: 40px; font-size: 18px; color: #fff; max-width: 900px; margin-left: 0; margin-right: auto; line-height: 1.6;">Stop paying $50,000+ for custom development. Get unlimited AI automation, web development, and digital marketing for a flat monthly fee. Scale your business without the overhead.</p>
+      <p style="text-align: left; margin-bottom: 40px; font-size: 18px; color: #fff; max-width: 900px; margin-left: 0; margin-right: auto; line-height: 1.6;">While your competitors struggle with expensive agencies and long development cycles, we deliver results in 24 hours. That's the difference between leading your market and falling behind.</p>
+      <p style="text-align: left; margin-bottom: 40px; font-size: 18px; color: #fff; max-width: 900px; margin-left: 0; margin-right: auto; line-height: 1.6;">Join 1000+ founders who've scaled their businesses with our proven system. From AI chatbots to full-stack applications, we build everything you need to dominate your industry.</p>
+      <p style="text-align: left; margin-bottom: 50px; font-size: 20px; font-weight: 600; color: #fff; max-width: 800px; margin-left: 0; margin-right: auto;">Ready to 10x your business growth? Let's build your competitive advantage.</p>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin: 40px 0 0 0; max-width: 600px;">
+        <div style="text-align: center; padding: 30px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 20px; color: #333; display: flex; flex-direction: column; align-items: center;">
+          <span style="font-size: 48px; font-weight: 700; color: #1e3c72; line-height: 1;">24h</span>
+          <span style="font-size: 15px; color: #666; margin-top: 8px;">Rapid Execution</span>
+          <span style="font-size: 13px; color: #888; margin-top: 4px;">Submit your request, and we'll have it done within a day.</span>
+        </div>
+        <div style="text-align: center; padding: 30px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 20px; color: #333; display: flex; flex-direction: column; align-items: center;">
+          <span style="font-size: 48px; font-weight: 700; color: #1e3c72; line-height: 1;">Unlimited</span>
+          <span style="font-size: 15px; color: #666; margin-top: 8px;">Revisions</span>
+          <span style="font-size: 13px; color: #888; margin-top: 4px;">Request unlimited tweaks, and we'll keep optimizing until you're 100% satisfied.</span>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: flex-start; gap: 32px; margin: 48px 0 0 0; max-width: 700px;">
+        <div style="background: linear-gradient(135deg, #e0e7ef 0%, #b0b8c9 100%); color: #222; border-radius: 16px; padding: 24px 32px; text-align: center; min-width: 160px; box-shadow: 0 4px 16px rgba(102,126,234,0.10);">
+          <div style="font-size: 32px; font-weight: 700;">200+</div>
+          <div style="font-size: 15px; opacity: 0.9;">Projects</div>
+        </div>
+        <div style="background: linear-gradient(135deg, #e0e7ef 0%, #b0b8c9 100%); color: #222; border-radius: 16px; padding: 24px 32px; text-align: center; min-width: 160px; box-shadow: 0 4px 16px rgba(102,126,234,0.10);">
+          <div style="font-size: 32px; font-weight: 700;">1000+</div>
+          <div style="font-size: 15px; opacity: 0.9;">Clients</div>
+        </div>
+        <div style="background: linear-gradient(135deg, #e0e7ef 0%, #b0b8c9 100%); color: #222; border-radius: 16px; padding: 24px 32px; text-align: center; min-width: 160px; box-shadow: 0 4px 16px rgba(102,126,234,0.10);">
+          <div style="font-size: 32px; font-weight: 700;">99.9%</div>
+          <div style="font-size: 15px; opacity: 0.9;">Uptime</div>
+        </div>
+      </div>
+      <div class="cta-buttons" style="justify-content: flex-start;">
+        <button>Let's Talk</button>
+        <button>Book a Free Consultation</button>
+        <button>Explore Our Services</button>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="section" id="services">
+    <h3>Our Services</h3>
+    <div class="service-grid">
+      <div class="card">
+        <strong style="font-size: 20px;">AI & Smart Automation</strong>
+        <p style="font-size: 14px; color: #666; margin: 8px 0 16px 0;">We build intelligent systems that learn from your data and automate complex tasks, saving you time and reducing errors.</p>
+        <div class="subsection-title">Technologies Used</div>
+        <div class="tag-slider">
+          <div class="tag-row">
+            <span class="tag-box">TensorFlow</span>
+            <span class="tag-box">PyTorch</span>
+            <span class="tag-box">scikit-learn</span>
+            <span class="tag-box">OpenAI GPT</span>
+          </div>
+        </div>
+        <div class="subsection-title">What You Get</div>
+        <div class="tag-slider">
+          <div class="tag-row">
+            <span class="tag-box">96.5% Accuracy</span>
+            <span class="tag-box">10x Faster Processing</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <strong style="font-size: 20px;">Business Process Automation</strong>
+        <p style="font-size: 14px; color: #666; margin: 8px 0 16px 0;">We connect your apps and automate repetitive tasks so your team can focus on what matters most.</p>
+        <div class="subsection-title">Technologies Used</div>
+        <div class="tag-slider">
+          <div class="tag-row">
+            <span class="tag-box">Zapier</span>
+            <span class="tag-box">n8n</span>
+            <span class="tag-box">Make.com</span>
+            <span class="tag-box">Power Automate</span>
+          </div>
+        </div>
+        <div class="subsection-title">What You Get</div>
+        <div class="tag-slider">
+          <div class="tag-row">
+            <span class="tag-box">85% Time Saved</span>
+            <span class="tag-box"><2% Error Rate</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <strong style="font-size: 20px;">Cloud Infrastructure & Deployment</strong>
+        <p style="font-size: 14px; color: #666; margin: 8px 0 16px 0;">We set up and manage your cloud infrastructure so your applications run smoothly and scale automatically.</p>
+        <div class="subsection-title">Technologies Used</div>
+        <div class="tag-slider">
+          <div class="tag-row">
+            <span class="tag-box">AWS</span>
+            <span class="tag-box">GCP</span>
+            <span class="tag-box">Docker</span>
+            <span class="tag-box">Kubernetes</span>
+            <span class="tag-box">Terraform</span>
+            <span class="tag-box">Jenkins</span>
+          </div>
+        </div>
+        <div class="subsection-title">What You Get</div>
+        <div class="tag-slider">
+          <div class="tag-row">
+            <span class="tag-box">5min Deployments</span>
+            <span class="tag-box">99.99% Uptime</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <strong style="font-size: 20px;">Custom Web & Mobile Apps</strong>
+        <p style="font-size: 14px; color: #666; margin: 8px 0 16px 0;">We build beautiful, fast websites and mobile apps that your customers will love to use.</p>
+        <div class="subsection-title">Technologies Used</div>
+        <div class="tag-slider">
+          <div class="tag-row">
+            <span class="tag-box">React</span>
+            <span class="tag-box">Flutter</span>
+            <span class="tag-box">Next.js</span>
+            <span class="tag-box">React Native</span>
+          </div>
+        </div>
+        <div class="subsection-title">What You Get</div>
+        <div class="tag-slider">
+          <div class="tag-row">
+            <span class="tag-box"><2s Load Time</span>
+            <span class="tag-box">4.8/5 User Rating</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <strong style="font-size: 20px;">Third-Party Integrations</strong>
+        <p style="font-size: 14px; color: #666; margin: 8px 0 16px 0;">We connect your business with payment processors, communication tools, and other services you need.</p>
+        <div class="subsection-title">Technologies Used</div>
+        <div class="tag-slider">
+          <div class="tag-row">
+            <span class="tag-box">REST</span>
+            <span class="tag-box">GraphQL</span>
+            <span class="tag-box">Twilio</span>
+            <span class="tag-box">Stripe</span>
+          </div>
+        </div>
+        <div class="subsection-title">What You Get</div>
+        <div class="tag-slider">
+          <div class="tag-row">
+            <span class="tag-box"><100ms Response</span>
+            <span class="tag-box">99.5% Success Rate</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <strong style="font-size: 20px;">AI Chatbots & Support</strong>
+        <p style="font-size: 14px; color: #666; margin: 8px 0 16px 0;">We create intelligent chatbots that answer customer questions 24/7 and handle support automatically.</p>
+        <div class="subsection-title">Technologies Used</div>
+        <div class="tag-slider">
+          <div class="tag-row">
+            <span class="tag-box">Dialogflow</span>
+            <span class="tag-box">Rasa</span>
+            <span class="tag-box">GPT API</span>
+            <span class="tag-box">OpenAI</span>
+          </div>
+        </div>
+        <div class="subsection-title">What You Get</div>
+        <div class="tag-slider">
+          <div class="tag-row">
+            <span class="tag-box">0.5s Response Time</span>
+            <span class="tag-box">98% Accuracy</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <strong style="font-size: 20px;">Video Calling Solutions</strong>
+        <p style="font-size: 14px; color: #666; margin: 8px 0 16px 0;">We build custom video calling features for your app, perfect for consultations, meetings, and customer support.</p>
+        <div class="subsection-title">Technologies Used</div>
+        <div class="tag-slider">
+          <div class="tag-row">
+            <span class="tag-box">WebRTC</span>
+            <span class="tag-box">Twilio Video</span>
+            <span class="tag-box">Agora SDK</span>
+            <span class="tag-box">Socket.io</span>
+          </div>
+        </div>
+        <div class="subsection-title">What You Get</div>
+        <div class="tag-slider">
+          <div class="tag-row">
+            <span class="tag-box"><50ms Latency</span>
+            <span class="tag-box">99.9% Uptime</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Innovation Showcase Section -->
+  <section class="section" id="projects">
+    <h3>Our Projects</h3>
+    <p style="text-align:center; max-width:600px; margin: 0 auto 32px auto; color:#444;">Explore some of our most impactful and creative solutions, blending technology and vision to deliver real-world results.</p>
+    <div class="innovation-grid">
+      <div class="card">
+        <div style="font-size:40px; margin-bottom:12px;">🤖</div>
+        <strong style="font-size:18px;">HR Talent Acquisition Platform</strong>
+        <p style="font-size:14px; color:#555; margin-top:8px;">Automated resume analysis and candidate selection with AI-powered evaluation.</p>
+        <div style="margin-top:16px; padding:12px; background:#f8f9fa; border-radius:8px;">
+          <div style="margin-bottom:12px;">
+            <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Tech Stack</div>
+            <div style="font-size:11px; color:#007bff; background:#e3f2fd; padding:2px 6px; border-radius:4px; display:inline-block;">Python, Streamlit, SimpleAI</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div style="flex:1;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Users</div>
+              <div style="font-size:11px; color:#28a745; background:#d4edda; padding:2px 6px; border-radius:4px; display:inline-block;">500+ HR professionals</div>
+            </div>
+            <div style="flex:1; text-align:right;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Uptime</div>
+              <div style="font-size:11px; color:#ffc107; background:#fff3cd; padding:2px 6px; border-radius:4px; display:inline-block;">99.8%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:40px; margin-bottom:12px;">⚡</div>
+        <strong style="font-size:18px;">Business Process Automation Suite</strong>
+        <p style="font-size:14px; color:#555; margin-top:8px;">Custom workflow automation solutions for business process optimization.</p>
+        <div style="margin-top:16px; padding:12px; background:#f8f9fa; border-radius:8px;">
+          <div style="margin-bottom:12px;">
+            <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Tech Stack</div>
+            <div style="font-size:11px; color:#007bff; background:#e3f2fd; padding:2px 6px; border-radius:4px; display:inline-block;">Zapier, TypeScript, React</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div style="flex:1;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Users</div>
+              <div style="font-size:11px; color:#28a745; background:#d4edda; padding:2px 6px; border-radius:4px; display:inline-block;">200+ businesses</div>
+            </div>
+            <div style="flex:1; text-align:right;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Uptime</div>
+              <div style="font-size:11px; color:#ffc107; background:#fff3cd; padding:2px 6px; border-radius:4px; display:inline-block;">99.9%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:40px; margin-bottom:12px;">🔬</div>
+        <strong style="font-size:18px;">Medical Imaging Analysis System</strong>
+        <p style="font-size:14px; color:#555; margin-top:8px;">Advanced computer vision solutions for medical and industrial applications.</p>
+        <div style="margin-top:16px; padding:12px; background:#f8f9fa; border-radius:8px;">
+          <div style="margin-bottom:12px;">
+            <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Tech Stack</div>
+            <div style="font-size:11px; color:#007bff; background:#e3f2fd; padding:2px 6px; border-radius:4px; display:inline-block;">Python, OpenCV, TensorFlow</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div style="flex:1;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Users</div>
+              <div style="font-size:11px; color:#28a745; background:#d4edda; padding:2px 6px; border-radius:4px; display:inline-block;">150+ researchers</div>
+            </div>
+            <div style="flex:1; text-align:right;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Uptime</div>
+              <div style="font-size:11px; color:#ffc107; background:#fff3cd; padding:2px 6px; border-radius:4px; display:inline-block;">99.7%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:40px; margin-bottom:12px;">🩸</div>
+        <strong style="font-size:18px;">Hospital Blood Inventory System</strong>
+        <p style="font-size:14px; color:#555; margin-top:8px;">Comprehensive blood inventory and donor management system.</p>
+        <div style="margin-top:16px; padding:12px; background:#f8f9fa; border-radius:8px;">
+          <div style="margin-bottom:12px;">
+            <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Tech Stack</div>
+            <div style="font-size:11px; color:#007bff; background:#e3f2fd; padding:2px 6px; border-radius:4px; display:inline-block;">React, Node.js, MongoDB</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div style="flex:1;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Users</div>
+              <div style="font-size:11px; color:#28a745; background:#d4edda; padding:2px 6px; border-radius:4px; display:inline-block;">50+ hospitals</div>
+            </div>
+            <div style="flex:1; text-align:right;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Uptime</div>
+              <div style="font-size:11px; color:#ffc107; background:#fff3cd; padding:2px 6px; border-radius:4px; display:inline-block;">99.9%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:40px; margin-bottom:12px;">🏥</div>
+        <strong style="font-size:18px;">Healthcare Diagnostic AI Tool</strong>
+        <p style="font-size:14px; color:#555; margin-top:8px;">ML-powered diagnostic tool for early cancer detection.</p>
+        <div style="margin-top:16px; padding:12px; background:#f8f9fa; border-radius:8px;">
+          <div style="margin-bottom:12px;">
+            <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Tech Stack</div>
+            <div style="font-size:11px; color:#007bff; background:#e3f2fd; padding:2px 6px; border-radius:4px; display:inline-block;">Python, scikit-learn, Flask</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div style="flex:1;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Users</div>
+              <div style="font-size:11px; color:#28a745; background:#d4edda; padding:2px 6px; border-radius:4px; display:inline-block;">300+ medical professionals</div>
+            </div>
+            <div style="flex:1; text-align:right;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Uptime</div>
+              <div style="font-size:11px; color:#ffc107; background:#fff3cd; padding:2px 6px; border-radius:4px; display:inline-block;">99.6%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:40px; margin-bottom:12px;">🌐</div>
+        <strong style="font-size:18px;">Multilingual Content Platform</strong>
+        <p style="font-size:14px; color:#555; margin-top:8px;">Real-time English to French translation service with NLP.</p>
+        <div style="margin-top:16px; padding:12px; background:#f8f9fa; border-radius:8px;">
+          <div style="margin-bottom:12px;">
+            <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Tech Stack</div>
+            <div style="font-size:11px; color:#007bff; background:#e3f2fd; padding:2px 6px; border-radius:4px; display:inline-block;">Python, Transformers, FastAPI</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div style="flex:1;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Users</div>
+              <div style="font-size:11px; color:#28a745; background:#d4edda; padding:2px 6px; border-radius:4px; display:inline-block;">1000+ global users</div>
+            </div>
+            <div style="flex:1; text-align:right;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Uptime</div>
+              <div style="font-size:11px; color:#ffc107; background:#fff3cd; padding:2px 6px; border-radius:4px; display:inline-block;">99.8%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:40px; margin-bottom:12px;">💼</div>
+        <strong style="font-size:18px;">Career Matching Platform</strong>
+        <p style="font-size:14px; color:#555; margin-top:8px;">AI-powered job matching and career development platform.</p>
+        <div style="margin-top:16px; padding:12px; background:#f8f9fa; border-radius:8px;">
+          <div style="margin-bottom:12px;">
+            <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Tech Stack</div>
+            <div style="font-size:11px; color:#007bff; background:#e3f2fd; padding:2px 6px; border-radius:4px; display:inline-block;">React, Node.js, PostgreSQL</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div style="flex:1;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Users</div>
+              <div style="font-size:11px; color:#28a745; background:#d4edda; padding:2px 6px; border-radius:4px; display:inline-block;">2000+ job seekers</div>
+            </div>
+            <div style="flex:1; text-align:right;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Uptime</div>
+              <div style="font-size:11px; color:#ffc107; background:#fff3cd; padding:2px 6px; border-radius:4px; display:inline-block;">99.9%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:40px; margin-bottom:12px;">☁️</div>
+        <strong style="font-size:18px;">E-commerce Platform on AWS</strong>
+        <p style="font-size:14px; color:#555; margin-top:8px;">Scalable React applications deployed on AWS infrastructure.</p>
+        <div style="margin-top:16px; padding:12px; background:#f8f9fa; border-radius:8px;">
+          <div style="margin-bottom:12px;">
+            <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Tech Stack</div>
+            <div style="font-size:11px; color:#007bff; background:#e3f2fd; padding:2px 6px; border-radius:4px; display:inline-block;">React, AWS S3, CloudFront</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div style="flex:1;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Users</div>
+              <div style="font-size:11px; color:#28a745; background:#d4edda; padding:2px 6px; border-radius:4px; display:inline-block;">500+ daily visitors</div>
+            </div>
+            <div style="flex:1; text-align:right;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Uptime</div>
+              <div style="font-size:11px; color:#ffc107; background:#fff3cd; padding:2px 6px; border-radius:4px; display:inline-block;">99.95%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:40px; margin-bottom:12px;">📸</div>
+        <strong style="font-size:18px;">Digital Asset Management System</strong>
+        <p style="font-size:14px; color:#555; margin-top:8px;">Advanced image logging and management with Firebase integration.</p>
+        <div style="margin-top:16px; padding:12px; background:#f8f9fa; border-radius:8px;">
+          <div style="margin-bottom:12px;">
+            <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Tech Stack</div>
+            <div style="font-size:11px; color:#007bff; background:#e3f2fd; padding:2px 6px; border-radius:4px; display:inline-block;">React, Firebase, Cloudinary</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div style="flex:1;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Users</div>
+              <div style="font-size:11px; color:#28a745; background:#d4edda; padding:2px 6px; border-radius:4px; display:inline-block;">800+ content creators</div>
+            </div>
+            <div style="flex:1; text-align:right;">
+              <div style="font-size:12px; color:#666; font-weight:bold; margin-bottom:4px;">Uptime</div>
+              <div style="font-size:11px; color:#ffc107; background:#fff3cd; padding:2px 6px; border-radius:4px; display:inline-block;">99.7%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="section" id="contact" style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #fff; margin-bottom: 0;">
+    <h3 style="color: #fff; position: relative;" class="contact-heading">Contact Us</h3>
+    <style>
+      .contact-heading::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: #fff !important;
+        border-radius: 2px;
+      }
+    </style>
+    <div style="display: flex; justify-content: center; gap: 40px; margin-top: 40px;">
+      <a href="mailto:hello@finsights.com" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; transition: all 0.3s ease;">
+        <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(255,255,255,0.3);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </div>
+        <span style="color: #fff; font-weight: 500; font-size: 14px;">Email</span>
+      </a>
+      
+      <a href="https://linkedin.com/company/finsights" target="_blank" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; transition: all 0.3s ease;">
+        <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(255,255,255,0.3);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </div>
+        <span style="color: #fff; font-weight: 500; font-size: 14px;">LinkedIn</span>
+      </a>
+      
+      <a href="https://instagram.com/finsights" target="_blank" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; transition: all 0.3s ease;">
+        <div style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(255,255,255,0.3);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </div>
+        <span style="color: #fff; font-weight: 500; font-size: 14px;">Instagram</span>
+      </a>
+    </div>
+  </section>
+
+  <footer style="margin-top: 0;">
+    <p>© 2025 Gikit. All rights reserved.</p>
+  </footer>
+</body>
+</html>
